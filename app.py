@@ -102,16 +102,14 @@ def text_to_speech(text_input, lang, title):
     tts.save(filepath)
     return filepath
 
-# Botón para reproducir audio
-if st.button("🔊 Escuchar Cuento"):
+# Botón para descargar audio sin reproductor
+audio_button_label = "📥 Descargar Audio"
+if st.button(audio_button_label):
     os.makedirs("temp", exist_ok=True)
     audio_path = text_to_speech(story_text, language_code, story_title)
-    st.audio(audio_path, format="audio/mp3")
-
-    # Enlace de descarga
     with open(audio_path, "rb") as f:
         bin_str = base64.b64encode(f.read()).decode()
-    href = f'<a href="data:audio/mp3;base64,{bin_str}" download="{os.path.basename(audio_path)}">📥 Descargar Audio</a>'
+    href = f'<a href="data:audio/mp3;base64,{bin_str}" download="{os.path.basename(audio_path)}">{audio_button_label}</a>'
     st.markdown(href, unsafe_allow_html=True)
 
 # Limpieza de archivos antiguos
