@@ -17,7 +17,7 @@ st.set_page_config(
 st.markdown("""
     <style>
         body {
-            background-color: #f5f5dc;
+            background-color: #000000;
         }
         .block-container {
             padding: 2rem;
