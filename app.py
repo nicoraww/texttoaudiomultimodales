@@ -35,15 +35,17 @@ st.markdown("""
         }
         /* Botones con fondo blanco y texto negro */
         .stButton > button {
-            background-color: #ffffff;
-            color: #000000;
-            border: none;
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
             border-radius: 0.5rem;
             font-weight: bold;
             padding: 0.6rem 1.2rem;
         }
         .stButton > button:hover {
-            background-color: #e0e0e0;
+            background-color: #333333;
+            color: #ffdd00;
+            border-color: #ffdd00;
         }
         /* Ajuste de elementos de selección y slider */
         .stSelectbox > div, .stSlider > div {
@@ -103,13 +105,12 @@ if st.button("🔊 Escuchar Cuento"):
     os.makedirs("temp", exist_ok=True)
     # Generar audio
     audio_path = text_to_speech(story_text, language_code, story_title)
-    # Leer bytes y reproducir
-    with open(audio_path, "rb") as f:
-        audio_bytes = f.read()
-    st.audio(audio_bytes, format="audio/mp3")
+    # Reproducir directamente desde el archivo
+    st.audio(audio_path, format="audio/mp3")
 
     # Enlace de descarga
-    bin_str = base64.b64encode(audio_bytes).decode()
+    with open(audio_path, "rb") as f:
+        bin_str = base64.b64encode(f.read()).decode()
     href = f'<a href="data:audio/mp3;base64,{bin_str}" download="{os.path.basename(audio_path)}">📥 Descargar Audio</a>'
     st.markdown(href, unsafe_allow_html=True)
 
