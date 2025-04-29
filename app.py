@@ -13,7 +13,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Estilo minimalista con colores suaves
+# Estilo minimalista con colores suaves y mejor contraste en botones
 st.markdown("""
     <style>
         body {
@@ -28,14 +28,17 @@ st.markdown("""
         .stSelectContainer, .stSlider, .stSelectbox {
             margin-bottom: 1.5rem;
         }
+        /* Botones con mayor contraste */
         .stButton > button {
-            background-color: #e2c799;
-            color: black;
+            background-color: #4a4a4a;
+            color: #ffffff;
+            border: none;
             border-radius: 0.5rem;
             font-weight: bold;
+            padding: 0.6rem 1.2rem;
         }
         .stButton > button:hover {
-            background-color: #d4b277;
+            background-color: #6a6a6a;
         }
     </style>
 """, unsafe_allow_html=True)
