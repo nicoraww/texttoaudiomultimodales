@@ -13,32 +13,42 @@ st.set_page_config(
     layout="centered"
 )
 
-# Estilo minimalista con colores suaves y botones negros
+# Estilo oscuro con texto blanco y botones invertidos
 st.markdown("""
     <style>
         body {
             background-color: #000000;
+            color: #ffffff;
         }
         .block-container {
             padding: 2rem;
             border-radius: 12px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .stSelectContainer, .stSlider, .stSelectbox {
-            margin-bottom: 1.5rem;
-        }
-        /* Botones en negro */
-        .stButton > button {
             background-color: #000000;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+        }
+        /* Texto y componentes */
+        .stText, .stMarkdown, .stHeader, .stSelectContainer, .stSelectbox, .stSlider {
             color: #ffffff;
+        }
+        .stSlider > div > div > div {
+            color: #ffffff;
+        }
+        /* Botones con fondo blanco y texto negro */
+        .stButton > button {
+            background-color: #ffffff;
+            color: #000000;
             border: none;
             border-radius: 0.5rem;
             font-weight: bold;
             padding: 0.6rem 1.2rem;
         }
         .stButton > button:hover {
-            background-color: #333333;
+            background-color: #e0e0e0;
+        }
+        /* Ajuste de elementos de selección y slider */
+        .stSelectbox > div, .stSlider > div {
+            background-color: #1a1a1a;
+            color: #ffffff;
         }
     </style>
 """, unsafe_allow_html=True)
