@@ -13,14 +13,14 @@ st.set_page_config(
     layout="centered"
 )
 
-# Estilo minimalista con colores suaves y mejor contraste en botones
+# Estilo minimalista con colores suaves y botones negros
 st.markdown("""
     <style>
         body {
             background-color: #f5f5dc;
         }
         .block-container {
-            padding: 2rem 2rem;
+            padding: 2rem;
             border-radius: 12px;
             background-color: #ffffff;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -28,9 +28,9 @@ st.markdown("""
         .stSelectContainer, .stSlider, .stSelectbox {
             margin-bottom: 1.5rem;
         }
-        /* Botones con mayor contraste */
+        /* Botones en negro */
         .stButton > button {
-            background-color: #4a4a4a;
+            background-color: #000000;
             color: #ffffff;
             border: none;
             border-radius: 0.5rem;
@@ -38,7 +38,7 @@ st.markdown("""
             padding: 0.6rem 1.2rem;
         }
         .stButton > button:hover {
-            background-color: #6a6a6a;
+            background-color: #333333;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -91,12 +91,15 @@ def text_to_speech(text_input, lang, title):
 # Botón para reproducir audio del cuento
 if st.button("🔊 Escuchar Cuento"):
     os.makedirs("temp", exist_ok=True)
+    # Generar audio
     audio_path = text_to_speech(story_text, language_code, story_title)
-    st.audio(audio_path, format="audio/mp3")
-
+    # Leer bytes y reproducir
     with open(audio_path, "rb") as f:
-        data = f.read()
-    bin_str = base64.b64encode(data).decode()
+        audio_bytes = f.read()
+    st.audio(audio_bytes, format="audio/mp3")
+
+    # Enlace de descarga
+    bin_str = base64.b64encode(audio_bytes).decode()
     href = f'<a href="data:audio/mp3;base64,{bin_str}" download="{os.path.basename(audio_path)}">📥 Descargar Audio</a>'
     st.markdown(href, unsafe_allow_html=True)
 
